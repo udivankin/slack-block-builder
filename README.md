@@ -143,6 +143,10 @@ Below is a list of supported objects and how to access them in **Block Builder**
 | Input              | Block              | :white_check_mark:             | `Blocks.Input()`                  
 | Section            | Block              | :white_check_mark:             | `Blocks.Section()`
 | Video              | Block              | :white_check_mark:             | `Blocks.Video()`                
+| Rich Text          | Block              | :white_check_mark:             | `Blocks.RichText()`                
+| Markdown           | Block              | :white_check_mark:             | `Blocks.Markdown()`                
+| Table              | Block              | :white_check_mark:             | `Blocks.Table()`                
+| Context Actions    | Block              | :white_check_mark:             | `Blocks.ContextActions()`                
 | Button             | Element            | :white_check_mark:️             | `Elements.Button()`               
 | Checkboxes         | Element            | :white_check_mark:             | `Elements.Checkboxes()`           
 | Date Picker        | Element            | :white_check_mark:             | `Elements.DatePicker()`
@@ -158,9 +162,27 @@ Below is a list of supported objects and how to access them in **Block Builder**
 | Select Menus       | Element            | :white_check_mark:             | `Elements.[Type]Select()`          
 | Multi-Select Menus | Element            | :white_check_mark:             | `Elements.[Type]MultiSelect()`
 | URL Input          | Element            | :white_check_mark:             | `Elements.NumberInput()`
+| Workflow Button    | Element            | :white_check_mark:             | `Elements.WorkflowButton()`
+| Icon Button        | Element            | :white_check_mark:             | `Elements.IconButton()`
+| Feedback Buttons   | Element            | :white_check_mark:             | `Elements.FeedbackButtons()`
+| Rich Text Input    | Element            | :white_check_mark:             | `Elements.RichTextInput()`
 | Option             | Composition Object | :white_check_mark:             | `Bits.Option()`                   
 | Confirm Dialog     | Composition Object | :white_check_mark:             | `Bits.ConfirmationDialog()`       
 | Option Group       | Composition Object | :white_check_mark:             | `Bits.OptionGroup()`
+| Rich Text Section  | Composition Object | :white_check_mark:             | `Bits.RichTextSection()`
+| Rich Text List     | Composition Object | :white_check_mark:             | `Bits.RichTextList()`
+| Rich Text Quote    | Composition Object | :white_check_mark:             | `Bits.RichTextQuote()`
+| Rich Text Preformatted | Composition Object | :white_check_mark:         | `Bits.RichTextPreformatted()`
+| Rich Text Text     | Composition Object | :white_check_mark:             | `Bits.RichTextText()`
+| Rich Text Emoji    | Composition Object | :white_check_mark:             | `Bits.RichTextEmoji()`
+| Rich Text Link     | Composition Object | :white_check_mark:             | `Bits.RichTextLink()`
+| Rich Text User     | Composition Object | :white_check_mark:             | `Bits.RichTextUser()`
+| Rich Text Channel  | Composition Object | :white_check_mark:             | `Bits.RichTextChannel()`
+| Rich Text Usergroup | Composition Object | :white_check_mark:            | `Bits.RichTextUsergroup()`
+| Rich Text Broadcast | Composition Object | :white_check_mark:            | `Bits.RichTextBroadcast()`
+| Rich Text Date     | Composition Object | :white_check_mark:             | `Bits.RichTextDate()`
+| Rich Text Color    | Composition Object | :white_check_mark:             | `Bits.RichTextColor()`
+| Rich Text Team     | Composition Object | :white_check_mark:             | `Bits.RichTextTeam()`
 | Attachment         | Legacy Feature     | :white_check_mark:             | `Bits.Attachment()`              
 
 ### Creating a Simple Interactive Message

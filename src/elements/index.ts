@@ -23,6 +23,10 @@ import { TimePickerBuilder, TimePickerParams } from './timepicker';
 import { URLInputBuilder, URLInputParams } from './url-input';
 import { UserMultiSelectBuilder, UserMultiSelectParams } from './user-multi-select';
 import { UserSelectBuilder, UserSelectParams } from './user-select';
+import { WorkflowButtonBuilder, WorkflowButtonParams } from './workflow-button';
+import { IconButtonBuilder, IconButtonParams } from './icon-button';
+import { FeedbackButtonsBuilder, FeedbackButtonsParams } from './feedback-buttons';
+import { RichTextInputBuilder, RichTextInputParams } from './rich-text-input';
 
 export type {
   ButtonBuilder,
@@ -71,6 +75,14 @@ export type {
   UserSelectParams,
   FileInputBuilder,
   FileInputParams,
+  WorkflowButtonBuilder,
+  WorkflowButtonParams,
+  IconButtonBuilder,
+  IconButtonParams,
+  FeedbackButtonsBuilder,
+  FeedbackButtonsParams,
+  RichTextInputBuilder,
+  RichTextInputParams,
 };
 
 /**
@@ -375,6 +387,54 @@ export function UserSelect(params?: UserSelectParams): UserSelectBuilder {
   return new UserSelectBuilder(params);
 }
 
+/**
+ * @param {Object} [params] Parameters passed to the constructor.
+ * @param {string} [params.text] Sets the display text for the workflow button.
+ * @param {string} [params.accessibilityLabel] Sets accessibility label.
+ *
+ * {@link https://api.slack.com/reference/block-kit/block-elements#workflow_button|View in Slack API Documentation}
+ */
+
+export function WorkflowButton(params?: WorkflowButtonParams): WorkflowButtonBuilder {
+  return new WorkflowButtonBuilder(params);
+}
+
+/**
+ * @param {Object} [params] Parameters passed to the constructor.
+ * @param {string} [params.actionId] Sets a string to be an identifier for the source of an action.
+ * @param {string} [params.icon] Sets the icon to display.
+ * @param {string} [params.text] Sets the text for the button.
+ *
+ * {@link https://api.slack.com/reference/block-kit/block-elements#icon_button|View in Slack API Documentation}
+ */
+
+export function IconButton(params?: IconButtonParams): IconButtonBuilder {
+  return new IconButtonBuilder(params);
+}
+
+/**
+ * @param {Object} [params] Parameters passed to the constructor.
+ * @param {string} [params.actionId] Sets a string to be an identifier for the source of an action.
+ *
+ * {@link https://api.slack.com/reference/block-kit/block-elements#feedback_buttons|View in Slack API Documentation}
+ */
+
+export function FeedbackButtons(params?: FeedbackButtonsParams): FeedbackButtonsBuilder {
+  return new FeedbackButtonsBuilder(params);
+}
+
+/**
+ * @param {Object} [params] Parameters passed to the constructor.
+ * @param {string} [params.actionId] Sets a string to be an identifier for the source of an action.
+ * @param {string} [params.placeholder] Sets placeholder text.
+ *
+ * {@link https://api.slack.com/reference/block-kit/block-elements#rich_text_input|View in Slack API Documentation}
+ */
+
+export function RichTextInput(params?: RichTextInputParams): RichTextInputBuilder {
+  return new RichTextInputBuilder(params);
+}
+
 const elements = {
   Button,
   ChannelMultiSelect,
@@ -399,6 +459,10 @@ const elements = {
   UserMultiSelect,
   UserSelect,
   FileInput,
+  WorkflowButton,
+  IconButton,
+  FeedbackButtons,
+  RichTextInput,
 };
 
 // Strange export. I know. For IDE highlighting purposes.
