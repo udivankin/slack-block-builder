@@ -46,7 +46,7 @@ export class RichTextChannelBuilder extends BitBuilderBase {
     public build(): Readonly<SlackDto> {
         const result: Record<string, unknown> = {
             type: RichTextElementType.Channel,
-            channel_id: this.props.channelId,
+            channelId: this.props.channelId,
         };
 
         if (this.props.style && Object.keys(this.props.style).length > 0) {

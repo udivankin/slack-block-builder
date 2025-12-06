@@ -68,7 +68,7 @@ export class RichTextTeamBuilder extends BitBuilderBase {
     public build(): Readonly<SlackDto> {
         const result: Record<string, unknown> = {
             type: RichTextElementType.Team,
-            team_id: this.props.teamId,
+            teamId: this.props.teamId,
         };
 
         if (this.props.style && Object.keys(this.props.style).length > 0) {

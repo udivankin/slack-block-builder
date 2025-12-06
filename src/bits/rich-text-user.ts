@@ -46,7 +46,7 @@ export class RichTextUserBuilder extends BitBuilderBase {
     public build(): Readonly<SlackDto> {
         const result: Record<string, unknown> = {
             type: RichTextElementType.User,
-            user_id: this.props.userId,
+            userId: this.props.userId,
         };
 
         if (this.props.style && Object.keys(this.props.style).length > 0) {

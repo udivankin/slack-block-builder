@@ -36,13 +36,15 @@ All setter methods return `this`, the instance of `RichTextBuilder` on which it 
 RichTextBuilder.blockId(string);
 ```
 
-Sets a string to be an identifier for any given block in a view or message. This is sent back to your app in interaction payloads and view submissions for your app to process. 
+Sets a string to be an identifier for any given block in a view or message. This is sent back to your app in interaction payloads and v iew submissions for your app to process. 
 
 ```javascript
 RichTextBuilder.elements(...elements);
 ```
 
 Adds rich text elements to the block. Accepts `RichTextSection`, `RichTextList`, `RichTextQuote`, and `RichTextPreformatted` builders.
+
+!> **Warning:** When using `RichText` elements inside a `Table` block, only `RichTextSection` is supported. `RichTextList`, `RichTextQuote`, and `RichTextPreformatted` cannot be used in table cells.
 
 ### Example Usage
 

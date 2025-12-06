@@ -42,7 +42,14 @@ Sets a string to be an identifier for any given block in a view or message. This
 TableBuilder.rows(array);
 ```
 
-Sets the table rows. Each row is an array of cells containing rich_text or raw_text objects.
+TableBuilder.rows(array);
+```
+
+Sets the table rows. Each row is an array of cells containing `rich_text` or raw text objects.
+
+?> **Note:** To simplify usage, you can pass plain strings or simple text objects (e.g., `{ type: 'text', text: '...' }`) and **Block Builder** will automatically wrap them in the required `RichText` -> `RichTextSection` -> `RichTextText` structure.
+
+!> **Warning:** Table cells only support `RichTextSection`. You cannot use `RichTextList`, `RichTextQuote`, or `RichTextPreformatted` inside a table cell. The builder will throw an error if you attempt to do so.
 
 ```javascript
 TableBuilder.columnSettings(array);

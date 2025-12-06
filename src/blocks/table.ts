@@ -1,11 +1,14 @@
 import { BlockBuilderBase } from '../internal/base';
-import { BlockType } from '../internal/constants';
+import { BlockType, RichTextElementType } from '../internal/constants';
 import { SlackBlockDto } from '../internal/dto';
 import { applyMixins } from '../internal/helpers';
 import {
     BlockId,
     End,
 } from '../internal/methods';
+import { RichTextBuilder } from './rich-text';
+import { RichTextSectionBuilder } from '../bits/rich-text-section';
+import { RichTextTextBuilder } from '../bits/rich-text-text';
 
 interface ColumnSettings {
     align?: 'left' | 'center' | 'right';
@@ -35,7 +38,60 @@ export class TableBuilder extends BlockBuilderBase {
      * @param {unknown[][]} rows - Array of rows, each containing cell objects.
      */
     public rows(rows: unknown[][]): this {
-        this.props.rows = rows;
+        this.props.rows = rows.map((row) => row.map((cell) => {
+            let cellResult = cell;
+
+            if (typeof cell === 'string') {
+                cellResult = new RichTextBuilder()
+                    .elements(
+                        new RichTextSectionBuilder()
+                            .elements(
+                                new RichTextTextBuilder({ text: cell }),
+                            ),
+                    )
+                    .build();
+            } else {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                const cellObj = cell as any;
+
+                if (cellObj.type === 'text' && typeof cellObj.text === 'string' && !cellObj.style) {
+                    cellResult = new RichTextBuilder()
+                        .elements(
+                            new RichTextSectionBuilder()
+                                .elements(
+                                    new RichTextTextBuilder({ text: cellObj.text }),
+                                ),
+                        )
+                        .build();
+                } else if (typeof cellObj.build === 'function') {
+                    cellResult = cellObj.build();
+                }
+            }
+
+            // Validate cell content
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const cellAny = cellResult as any;
+
+            if (cellAny.type !== BlockType.RichText) {
+                throw new Error(`Table cells must be of type '${BlockType.RichText}', but found '${cellAny.type}'. Verify that you are passing a RichText block or a string to the table rows.`);
+            }
+
+            if (cellAny?.elements && Array.isArray(cellAny.elements)) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                cellAny.elements.forEach((element: any) => {
+                    if ([
+                        RichTextElementType.List,
+                        RichTextElementType.Quote,
+                        RichTextElementType.Preformatted,
+                    ].includes(element.type)) {
+                        throw new Error(`Table cells cannot contain ${element.type}. Only rich_text_section is supported.`);
+                    }
+                });
+            }
+
+            return cellResult;
+        }));
+
         return this;
     }
 
@@ -52,7 +108,7 @@ export class TableBuilder extends BlockBuilderBase {
         return this.getResult(SlackBlockDto, {
             type: BlockType.Table,
             rows: this.props.rows,
-            column_settings: this.props.columnSettings,
+            columnSettings: this.props.columnSettings,
         });
     }
 }

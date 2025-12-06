@@ -118,7 +118,7 @@ import { Modal, Section, bold, link } from 'slack-block-builder';
 
 `Elements` – UI elements that are used to capture user interaction.
 
-`Bits` – These are composition objects and other bits and pieces from Slack's docs. Included are `Attachment`, `Options`, `OptionGroup`, and `ConfirmationDialog`. They felt like they were deserving of their own category.
+`Bits` – These are composition objects and other bits and pieces from Slack's docs. Included are `Attachment`, `Options`, `OptionGroup`, `ConfirmationDialog` and a list of rich text objects. They felt like they were deserving of their own category.
 
 `Utilities` – A group of utility functions. See [Utility Functions](#utility-functions).
 
@@ -184,6 +184,18 @@ Below is a list of supported objects and how to access them in **Block Builder**
 | Rich Text Color    | Composition Object | :white_check_mark:             | `Bits.RichTextColor()`
 | Rich Text Team     | Composition Object | :white_check_mark:             | `Bits.RichTextTeam()`
 | Attachment         | Legacy Feature     | :white_check_mark:             | `Bits.Attachment()`              
+
+### Rich Text Block
+
+The `Rich Text` block is used to display formatted, structured representation of text. It is also the output of the Slack client's WYSIWYG message composer, so all messages sent by end-users will have this format.
+
+Use this block to include user-defined formatted text in your Block Kit payload. While it is possible to format text with `mrkdwn`, `rich_text` is preferred and allows greater flexibility.
+
+You might encounter a `rich_text` block in a message payload, as a built-in type in apps created with the Deno Slack SDK, or as output of the `RichTextInput` block element.
+
+Rich text blocks can be deeply nested. For instance: a `RichTextList` can contain a `RichTextSection` which can contain bold style text.
+
+?> **Note:** When using `RichText` within a `Table` block, you are restricted to using `RichTextSection`. Other top-level elements like `RichTextList`, `RichTextQuote`, and `RichTextPreformatted` are not supported in table cells.
 
 ### Creating a Simple Interactive Message
 
@@ -420,7 +432,7 @@ const unfurl = ({ channel, ts, url }) => client.chat.unfurl({
 .catch((error) => console.log(error));
 ```
 
-Both `OptionCollection()` and `OptionGroupCollection()` come in handy when returning an array of options or option groups for select menus with external data sources, as seen in [Slack's API docs](https://docs.slack.dev/reference/block-kit/block-elements#external_multi_select):
+Both `OptionCollection()` and `OptionGroupCollection()` come in handy when returning an array of options or option groups for select menus with external data sources, as seen in [Slack's API docs](https://api.slack.com/reference/block-kit/block-elements#external_multi_select):
 
 ```javascript
 return { options: OptionCollection( /* Pass in options */ ) };

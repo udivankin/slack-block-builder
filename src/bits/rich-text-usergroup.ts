@@ -46,7 +46,7 @@ export class RichTextUsergroupBuilder extends BitBuilderBase {
     public build(): Readonly<SlackDto> {
         const result: Record<string, unknown> = {
             type: RichTextElementType.Usergroup,
-            usergroup_id: this.props.usergroupId,
+            usergroupId: this.props.usergroupId,
         };
 
         if (this.props.style && Object.keys(this.props.style).length > 0) {
